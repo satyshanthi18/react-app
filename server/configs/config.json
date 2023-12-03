@@ -1,0 +1,27 @@
+{
+  "database": {
+    "mongodb": {
+      "address": "localhost",
+      "port": "27017",
+      "dbName": "spendWise",
+      "uri": "mongodb://127.0.0.1:27017/spendWise"
+    }
+  },
+  "server": {
+    "app": {
+      "port": "3334",
+      "BASE_URL": "http://localhost:3334",
+      "route": ""
+    }
+  },
+
+  "jwt": {
+    "secret_key": "bryq9r%eup1+^dpv3q+=-ui!b6i_%hp)8_qh+d930*j6k!_*t-",
+    "accessExpirationMinutes": 2000,
+    "verifyEmailExpirationMinutes": 120,
+    "refreshExpirationDays": 20,
+    "resetPasswordExpirationMinutes": 400
+  },
+
+  "env": "development"
+}
