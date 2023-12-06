@@ -3,8 +3,8 @@ const createBudget = async (req, res) => {
     try {
       const {  category, amount,year, month } = req.body;
       const user = req.user._id;
-      const newBudget = new Budget({ user, category, amount, year, month });
-  
+      // const newBudget = new Budget({ user, category, amount, year, month });
+      const newBudget = new Budget({ user, category, amount});
       await newBudget.save();
   
       res.status(201).json(newBudget);
@@ -16,8 +16,8 @@ const createBudget = async (req, res) => {
   
   const getBudgets = async (req, res) => {
     try {
-      const budgets = await Budget.find({year:req.query.year,month:req.query.month,user:req.user._id});
-      
+      // const budgets = await Budget.find({year:req.query.year,month:req.query.month,user:req.user._id});
+      const budgets = await Budget.find({user:req.user._id});
       res.status(200).json(budgets);
     } catch (error) {
       console.error(error);

@@ -1,0 +1,21 @@
+/* Add this CSS to your styles or in your component's style tag */
+.notification-box {
+    position: fixed;
+    top: 10px; /* Adjust top value as needed */
+    right: 10px; /* Adjust right value as needed */
+    background-color: #fff; /* Background color for the box */
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000; /* Ensure it's above other elements */
+  }
+  
+  button {
+    margin-top: 10px; /* Adjust as needed for spacing */
+    padding: 8px 12px;
+    background-color: #007bff; /* Button background color */
+    color: #fff; /* Button text color */
+    border: none;
+    cursor: pointer;
+  }
+  

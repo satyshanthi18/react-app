@@ -5,7 +5,8 @@ const passport = require("passport");
 const { jwtStrategy } = require("./configs/passport");
 const routes = require("./app/routes");
 const mongoose = require("mongoose");
-const port = config.server.app.port;
+let port = process.env.NODE_ENV === 'test' ? 3335 : 3334;
+const env = config.env
 const route = config.server.app.route;
 const bodyParser = require("body-parser");
 const cors = require("cors");
@@ -33,7 +34,6 @@ app.use(passport.initialize());
 passport.use("jwt", jwtStrategy);
 
 app.use("/v1", routes);
-
 app.listen(port, () => {
   console.log(`Listening to port ${port}`);
 });

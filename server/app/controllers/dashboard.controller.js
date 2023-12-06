@@ -6,14 +6,14 @@ const Budget = require('../models/budget');
 const formatChartData = (data) => {
     return data.map((item, index) => ({
       id: index,
-      value: item.amount, // Adjust based on your model structure
+      value: item.amount, 
       label: item.category
     }));
   };
   const formatExpenseData = (data) => {
     return data.map((item, index) => ({
       id: index,
-      value: item.amount, // Adjust based on your model structure
+      value: item.amount, 
       label: item.description
     }));
   };
@@ -35,7 +35,8 @@ const getExpenses = async (req, res) => {
     try {
       const { month, year } = req.query;
       const user = req.user._id;
-      const budget = await Budget.find({ month, year,user }); // Adjust the query based on your model structure
+      // const budget = await Budget.find({ month, year,user });
+      const budget = await Budget.find({ user });
       const formattedBudget = formatChartData(budget);
       res.json(formattedBudget);
     } catch (error) {
@@ -62,16 +63,18 @@ const getExpenses = async (req, res) => {
 
   const getBudgetVsExpenses = async (req, res) => {
     try {
+      
       const { month, year } = req.query;
       const user = req.user._id;
+      
       const expense = await Expense.find({ month, year,user });
-      const budget = await Budget.find({ month, year, user });
-      const uniqueCategories = [...new Set([...expense.map((item) => item.category), ...budget.map((item) => item.category)])];
+      const budget = await Budget.find({  user });
+      const uniqueCategories = [...new Set([...expense?.map((item) => item.category), ...budget.map((item) => item.category)])];
       let result = uniqueCategories.map((category) => calculateTotal(category, expense, budget));
       res.json(result);
     } catch (error) {
       console.error(error);
-      res.status(500).json({ error: 'Internal Server Error' });
+      res.status(200).json({ error: 'Internal Server Error' });
     }
   };
   const getTotal = async (req, res) => {
@@ -79,7 +82,7 @@ const getExpenses = async (req, res) => {
       const { month, year } = req.query;
       const user = req.user._id;
       const expense = await Expense.find({ month, year,user });
-      const budget = await Budget.find({ month, year, user });
+      const budget = await Budget.find({  user });
       let totalBudget = 0, totalExpense=0;
       expense.map(e=>totalExpense+=e.amount)
       budget.map(b=>totalBudget+=b.amount)
@@ -120,7 +123,8 @@ const getExpenses = async (req, res) => {
         const currentYear =
           startMonth + i <= 12 ? startYear : startYear + Math.floor((startMonth + i - 1) / 12);
   
-        let budget = await Budget.find({ month: currentMonthIndex + 1, year: currentYear });
+        // let budget = await Budget.find({ month: currentMonthIndex + 1, year: currentYear });
+        let budget = await Budget.find({});
         let expenses = await Expense.find({ month: currentMonthIndex + 1, year: currentYear });
   
         let totalBudget = budget.reduce((acc, curr) => acc + curr.amount, 0);
