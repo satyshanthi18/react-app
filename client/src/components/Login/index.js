@@ -4,8 +4,8 @@ import axios from "axios";
 import config from "../../config.json";
 import Cookies from "js-cookie";
 const Login = ({ setIsAuthenticated }) => {
-  const adminEmail = "vikasraria14";
-  const adminPassword = "Raria@123";
+  const adminEmail = "";
+  const adminPassword = "";
 
   const [email, setEmail] = useState(adminEmail);
   const [password, setPassword] = useState(adminPassword);
